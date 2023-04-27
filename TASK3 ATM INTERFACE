@@ -1,0 +1,71 @@
+import java.util.Scanner;
+
+public class AtmInterface {
+    public static void main(String args[]) {
+        int balance = 40000, withdraw, deposit;
+        Scanner sc = new Scanner(System.in);
+        int pin = 9797;
+        System.out.println("PLEASE ENTER PIN: ");
+        int pass = sc.nextInt();
+        int i = 1;
+        int status = 0;
+        if (pass != pin) {
+            while (true) {
+                i++;
+                System.out.println("INCORRECT PIN ");
+                System.out.println("RE-ENTER THE PIN (Max. Attempts :- 4) : ");
+                pass = sc.nextInt();
+                if (pass == pin) {
+                    break;
+                }
+                if (i == 4) {
+                    // user will get 4 maximum attempts to re-enter the pin number
+                    System.out.println("LIMIT EXCEEDED !! TRY AGAIN LATER");
+                    System.exit(status);
+                }
+            }
+        }
+        if (pass == pin) {
+            System.out.println("******** WELCOME TO ATM ********");
+            while (true) {
+                System.out.println("-------------------------------");
+                System.out.println("Enter 1 to Check your Balance amount");
+                System.out.println("Enter 2 to Withdraw money");
+                System.out.println("Enter 3 to Deposit money");
+                System.out.println("Enter 4 to QUIT");
+                System.out.println("-------------------------------");
+                System.out.print("CHOOSE OPTION : ");
+                int choice = sc.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.println("BALANCE : " + balance);
+                        System.out.println("");
+                        break;
+                    case 2:
+                        System.out.println("ENTER AMOUNT TO WITHDRAW : ");
+                        withdraw = sc.nextInt();
+                        // checking if balance is less than withdrawal amount or is it zero!
+                        if (withdraw > balance || balance == status) {
+                            System.out.printf("INSUFFICIENT BALANCE!!\n");
+                            break;
+                        }
+                        System.out.println("COLLECT THE AMOUNT!");
+                        balance = balance - withdraw;
+                        System.out.println("");
+                        break;
+                    case 3:
+                        System.out.print("ENTER AMOUNT TO DEPOSITE: ");
+                        deposit = sc.nextInt();
+                        balance = balance + deposit;
+                        System.out.println("MONEY DEPOSITED SUCCESSFULLY");
+                        System.out.println(" ");
+                        break;
+
+                    case 4:
+                        System.out.println("THANKYOU FOR USING ATM SERVICE!");
+                        System.exit(status);
+                }
+            }
+        }
+    }
+}
